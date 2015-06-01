@@ -21,39 +21,53 @@ module.exports = {
 
     if ( files.length === 0 ) {
       //console.log( chalk.green( '>> no files to beautify' ) );
-      cli.error( 'No files provided as input', opts._);
+      cli.error( 'No files provided as input', opts._, '\n');
+      cli.showHelp();
       return;
     }
 
-    var cfg = {};
-
-    if (cli.pathToConfig && cli.pathToConfig.match(/\.js$/)) {
-      try {
-        cfg = require( path.resolve( process.cwd(), cli.pathToConfig) );
-      }
-      catch(ex) {
-        cli.error('Error requiring the module: ' + cli.pathToConfig);
-      }
-    }
-    else {
-      // assume JSON here
-      cfg = cli.getConfig();
+    if (!opts.output) {
+      cli.error('Output not specified');
+      cli.showHelp();
+      return;
     }
 
     var simpless = require('../index').create();
+    var util = require('util');
 
     simpless.on('error', function (e, err) {
 
-      cli.error('Error parsing less file\n\n', require('util').inspect(err));
+      cli.error('Error parsing less file\n\n', util.inspect(err));
     });
 
-    simpless.on('before:write', function (args) {
-      args.cancel = cli.opts.output;
+    simpless.on('resource:copied', function (e, args) {
+      cli.subtle('resource copied from:', args.from, 'to:', args.to);
     });
+
+    simpless.on('url:replaced', function (e, args) {
+      cli.subtle('url replaced from:', args.from, 'to:', args.to);
+    });
+
+    simpless.on('write:file write:minimized', function (e, args) {
+      cli.ok('File written:', args.dest);
+    });
+
+    cli.subtle('options', util.inspect(opts));
 
     simpless.process({
       src: files,
-      dest: path.resolve(process.cwd(), cli.opts.output)
-    }, cfg.simpless || {}  );
+      dest: path.resolve(process.cwd(), opts.output)
+    }, {
+      minimize: opts.minimize,
+      revision: opts.revision,
+      assetsPathFormat: opts.assetsPathFormat,
+      copyAssetsToDestFolder: opts.copyAssetsToDestFolder,
+      autoprefixer: {
+        browsers: opts.browsers
+      },
+      cssoOptions: {
+        structureModifications : opts.advanceMin
+      }
+    }  );
   }
 };

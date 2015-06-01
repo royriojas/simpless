@@ -1,53 +1,73 @@
-[![NPM Version](http://img.shields.io/npm/v/esbeautifier.svg?style=flat)](https://npmjs.org/package/esbeautifier)
-[![Build Status](http://img.shields.io/travis/royriojas/esbeautifier.svg?style=flat)](https://travis-ci.org/royriojas/esbeautifier)
+[![NPM Version](http://img.shields.io/npm/v/simpless.svg?style=flat)](https://npmjs.org/package/simpless)
+[![Build Status](http://img.shields.io/travis/royriojas/simpless.svg?style=flat)](https://travis-ci.org/royriojas/simpless)
 
-# esbeautifier
-Simple wrapper around esformatter to beautify javascript files overriding the content of the files
+# simpless
+`simpless` is yet another less wrapper. This one will:
+- parse your `less` files
+- allow you to include several files using `less-plugin-glob`
+- inline small url files into the output css file
+- copy the urls that cannot be inlined to a folder relative to the output
 
 ## Motivation
-
-`esformatter` only format the output to the stdout. This **tool will overwrite your files**. **Use it under your own risk**. 
+Just wanted to have a good wrapper to process my less resources, without having to manually install
+all of the dependencies. 
 
 ## Install
 
 ```bash
-npm i -g esbeautifier
+npm i -g simpless
 ```
 
 ## Usage
 
 ```
-Usage: esbeautifier [options] glob [glob1] [glob2]..[globN]
+========================================================
+Usage: simpless [options] glob [glob1] [glob2]..[globN]
+========================================================
 
 Options:
-  -k, --checkOnly      Will just run the beautifier and report which files need to be beautified
-  -u, --useCache       If true, this module will remember the `mtime` and `size` of the beatufied files and only
-                       operate on the ones that changed. If false, the cache will be destroyed. Cache will only be kept
-                       between executions with the useCache flag set to true.
-  -h, --help           Show this help
-  -v, --version        Outputs the version number
-  -q, --quiet          Show only the summary info
-  -c, --config String  Path to your `esformatter` config, if not provided will try to use the `.esformatter` file in
-                       your current working directory, if not found will use the one provided with the package
+  -b, --browsers [String]        the browsers to autoprefix. Default is `last 2 browsers`
+  -a, --advanceMin               Whether or not to apply more risky structural optimizations for CSS. By Default is `false`. Use it with care. Requires
+                                 --minimize
+  -c, --copyAssetsToDestFolder   Copy the assets to the destination folder. By default is `true` - default: true
+  -p, --assetsPathFormat String  The format of the assets rewrite path. By default is `assets/{REVISION}_{GUID}_{FNAME}` where {REVISION} is the revision
+                                 passed to the command, {GUID} the unique indetifier or the resource and {FNAME} the filename.
+  -m, --minimize                 Whether to minimize or not the output or not. By default is `false`. When the flag is set both the non minimified and
+                                 minified versions will be created
+  -o, --output String            The path and name for the output file
+  -r, --revision String          The revision to use in the file names and assets, for example the build number or other number to identify this resource
+  -h, --help                     Show this help
+  -v, --version                  Outputs the version number
+  -q, --quiet                    Show only the summary info
+
 ```
 
 ## Examples
 
 ```bash
-# this will overwrite your files! this is usually what you want thought
-esbeautifier src/**/*.js specs/**/*.js
+# this will compile demo.less and other-file.less into out.css 
+simpless src/demo.less src/other-file.less -o dest/out.css
 
-# check only which files need beautification
-# if at least one file require beautification the command will throw an exception
-esbeautifier src/**/*.js -k
+# this will compile demo.less and other-file.less into out.css
+# and generate out.min.css also
+simpless src/demo.less src/other-file.less -o dest/out.css -m
 
-# use cache
-esbeautifier -u src/**/*.js 
+# this will compile demo.less and other-file.less into out.css 
+# and generate out.min.css using structure modifications. Use it with care.
+simpless src/demo.less src/other-file.less -o dest/out.css -ma
+
+# this will compile demo.less and other-file.less into out.1.5.3.css 
+# and generate out.1.5.3.min.css using structure modifications and a revision value
+simpless src/demo.less src/other-file.less -o dest/out.css -ma -r 1.5.3
+
+# this will compile demo.less and other-file.less into out.1.5.3.css 
+# and generate out.1.5.3.min.css using structure modifications and a 
+# revision value and set the browsers to use autoprefix to `last 1 version`
+simpless src/demo.less src/other-file.less -o dest/out.css -ma -r 1.5.3 -b 'last 1 version'
 ```
 
 **Note**
 
-The cache is only kept if the executions of the beautifying command is done with the `-u` flag. If any execution omit this flag
-The cache will be destroyed and created again from scratch the next time the `-u` flag is provided
+
 
 ## [Changelog](./changelog.md)

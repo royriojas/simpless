@@ -6,7 +6,6 @@ var write = require( 'write' ).sync;
 var Promise = require( 'es6-promise' ).Promise;
 var path = require( 'path' );
 var url = require( 'url' );
-var md5 = require( 'MD5' );
 var format = require( 'stringformat' );
 var fs = require( 'fs-extra' );
 var autoPrefix = require( './lib/autoprefix' );
@@ -55,13 +54,19 @@ var checkIfRelativePath = function ( urlToCheck ) {
 
 module.exports = {
   create: function () {
+    var fileCache = {};
+    var idCounter = 0;
 
     return extend( dispatcher.create(), {
+      getId: function ( pathToFile ) {
+        var id = fileCache[ pathToFile ] = fileCache[ pathToFile ] || idCounter++;
+        return id;
+      },
       rewriteURLS: function ( ctn, src, destDir, options ) {
         var me = this;
         var URL_MATCHER = /url\(\s*[\'"]?\/?(.+?)[\'"]?\s*\)/gi; //regex used to match the urls inside the less or css files
 
-        var version = options.version;
+        var version = options.revision;
         var rewritePathTemplate = options.assetsPathFormat;
 
         if ( !isNull( ctn ) ) {
@@ -89,6 +94,8 @@ module.exports = {
         return ctn;
       },
       copyFileToNewLocation: function ( src, destDir, relativePathToFile, version, rewritePathTemplate ) {
+        rewritePathTemplate = rewritePathTemplate || '';
+
         var me = this;
         var dirOfFile = path.dirname( src );
 
@@ -102,11 +109,13 @@ module.exports = {
 
         var absolutePathToResource = path.normalize( path.resolve( dirOfFile, relativePath ) );
 
-        var md5OfResource = md5( absolutePathToResource );
+        var fileId = me.getId( absolutePathToResource ); //md5( absolutePathToResource );
 
         var fName = format( '{0}', path.basename( relativePath ) );
 
-        var relativeOutputFn = format( rewritePathTemplate, version, md5OfResource, fName );
+        var relativeOutputFn = rewritePathTemplate.replace( /\{REVISION\}/g, version ) // fileId, fName );
+          .replace( /\{GUID\}/g, fileId )
+          .replace( /\{FNAME\}/g, fName );
 
         var newPath = path.normalize( path.join( destDir, relativeOutputFn ) );
 
@@ -131,9 +140,14 @@ module.exports = {
 
         var opts = extend( true, {
           copyAssetsToDestFolder: true,
-          version: '',
-          minimize: true,
-          assetsPathFormat: 'assets/{0}_{1}_{2}',
+          revision: '',
+          minimize: false,
+          assetsPathFormat: 'assets/{REVISION}_{GUID}_{FNAME}',
+          autoprefixer: {
+            browsers: [
+              'last 2 versions'
+            ]
+          },
           lessOptions: {
             paths: [],
             relativeUrls: true,
@@ -141,7 +155,7 @@ module.exports = {
             dumpLineNumbers: 'comments'
           },
           cssoOptions: {
-            structureModifications: true
+            structureModifications: false
           }
         }, options );
 
@@ -150,9 +164,13 @@ module.exports = {
         ];
         var dest = descriptor.dest;
 
-        dest = addVersion( dest, opts.version );
+        dest = addVersion( dest, opts.revision );
 
-        me.fire( 'compile:start', descriptor );
+        me.fire( 'compile:start', {
+          descriptor: descriptor,
+          modifiedDest: dest,
+          options: opts
+        } );
 
         var promises = src.map( function ( file ) {
           me.fire( 'compile:file', {
@@ -164,7 +182,11 @@ module.exports = {
               result = me.rewriteURLS( result, file, path.dirname( dest ), opts );
             }
 
-            return autoPrefix( result, file, dest );
+            return autoPrefix( result, {
+              file: file,
+              dest: dest,
+              autoprefixer: opts.autoprefixer
+            } );
           } );
         } );
 
@@ -193,8 +215,11 @@ module.exports = {
             var csso = require( 'csso' );
             var cssoOptions = opts.cssoOptions || {};
             var minimized = csso.justDoIt( result, !!cssoOptions.structureModifications );
-            write( makeMinName( dest ), minimized );
-            me.fire( 'write:minimized', args );
+            var minimizedDest = makeMinName( dest );
+            write( minimizedDest, minimized );
+            me.fire( 'write:minimized', extend( {}, args, {
+              dest: minimizedDest
+            } ) );
           }
         } ).catch( function ( err ) {
           //console.log(err);
