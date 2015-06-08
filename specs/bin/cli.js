@@ -1,6 +1,5 @@
-describe( 'bin/esbeautifier', function () {
+describe( 'bin/cli', function () {
   var proxyquire = require( 'proxyquire' ).noCallThru().noPreserveCache();
-
 
   beforeEach( function () {
     var me = this;

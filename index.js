@@ -139,6 +139,7 @@ module.exports = {
         var me = this;
 
         var opts = extend( true, {
+          banner: '',
           copyAssetsToDestFolder: true,
           revision: '',
           minimize: false,
@@ -208,7 +209,10 @@ module.exports = {
 
           var result = args.results.join( os.EOL );
 
-          write( dest, result );
+          var banner = opts.banner ? opts.banner + os.EOL : '';
+
+          write( dest, (banner + result) );
+
           me.fire( 'write:file', args );
 
           if ( opts.minimize ) {
@@ -216,7 +220,9 @@ module.exports = {
             var cssoOptions = opts.cssoOptions || {};
             var minimized = csso.justDoIt( result, !!cssoOptions.structureModifications );
             var minimizedDest = makeMinName( dest );
-            write( minimizedDest, minimized );
+
+            write( minimizedDest, (banner + minimized) );
+
             me.fire( 'write:minimized', extend( {}, args, {
               dest: minimizedDest
             } ) );

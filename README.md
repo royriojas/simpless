@@ -66,8 +66,4 @@ simpless src/demo.less src/other-file.less -o dest/out.css -ma -r 1.5.3
 simpless src/demo.less src/other-file.less -o dest/out.css -ma -r 1.5.3 -b 'last 1 version'
 ```
 
-**Note**
-
-
-
 ## [Changelog](./changelog.md)

@@ -5,7 +5,7 @@ module.exports = {
 
   run: function ( cli ) {
     var expand = require( 'glob-expand' );
-    var console = require( './../lib/console' );
+    //var console = require( './../lib/console' );
 
     //var sFormat = require( 'stringformat' );
     var path = require( 'path' );
@@ -21,43 +21,44 @@ module.exports = {
 
     if ( files.length === 0 ) {
       //console.log( chalk.green( '>> no files to beautify' ) );
-      cli.error( 'No files provided as input', opts._, '\n');
+      cli.error( 'No files provided as input', opts._, '\n' );
       cli.showHelp();
       return;
     }
 
-    if (!opts.output) {
-      cli.error('Output not specified');
+    if ( !opts.output ) {
+      cli.error( 'Output not specified' );
       cli.showHelp();
       return;
     }
 
-    var simpless = require('../index').create();
-    var util = require('util');
+    var simpless = require( '../index' ).create();
+    var util = require( 'util' );
 
-    simpless.on('error', function (e, err) {
+    simpless.on( 'error', function ( e, err ) {
 
-      cli.error('Error parsing less file\n\n', util.inspect(err));
-    });
+      cli.error( 'Error parsing less file\n\n', util.inspect( err ) );
+    } );
 
-    simpless.on('resource:copied', function (e, args) {
-      cli.subtle('resource copied from:', args.from, 'to:', args.to);
-    });
+    simpless.on( 'resource:copied', function ( e, args ) {
+      cli.subtle( 'resource copied from:', args.from, 'to:', args.to );
+    } );
 
-    simpless.on('url:replaced', function (e, args) {
-      cli.subtle('url replaced from:', args.from, 'to:', args.to);
-    });
+    simpless.on( 'url:replaced', function ( e, args ) {
+      cli.subtle( 'url replaced from:', args.from, 'to:', args.to );
+    } );
 
-    simpless.on('write:file write:minimized', function (e, args) {
-      cli.ok('File written:', args.dest);
-    });
+    simpless.on( 'write:file write:minimized', function ( e, args ) {
+      cli.ok( 'File written:', args.dest );
+    } );
 
-    cli.subtle('options', util.inspect(opts));
+    cli.subtle( 'options', util.inspect( opts ) );
 
-    simpless.process({
+    simpless.process( {
       src: files,
-      dest: path.resolve(process.cwd(), opts.output)
+      dest: path.resolve( process.cwd(), opts.output )
     }, {
+      banner: opts.banner,
       minimize: opts.minimize,
       revision: opts.revision,
       assetsPathFormat: opts.assetsPathFormat,
@@ -66,8 +67,8 @@ module.exports = {
         browsers: opts.browsers
       },
       cssoOptions: {
-        structureModifications : opts.advanceMin
+        structureModifications: opts.advanceMin
       }
-    }  );
+    } );
   }
 };

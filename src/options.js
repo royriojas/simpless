@@ -2,11 +2,11 @@ var path = require( 'path' );
 
 module.exports = {
   pkgJSONPath: path.resolve( __dirname, '../package.json' ),
-//  configFile: {
-//    defaultName: 'package.json',
-//    pathToLocalConfig: path.resolve( __dirname, '../configs/simpless.json' ),
-//    description: 'Path to your `simpless` config, if not provided will try to use the `package.json` file in your current working directory, expecting an entry called `simpless`, if not found will use the one provided with this package'
-//  },
+  //  configFile: {
+  //    defaultName: 'package.json',
+  //    pathToLocalConfig: path.resolve( __dirname, '../configs/simpless.json' ),
+  //    description: 'Path to your `simpless` config, if not provided will try to use the `package.json` file in your current working directory, expecting an entry called `simpless`, if not found will use the one provided with this package'
+  //  },
   //useDefaultOptions: true,
   optionator: {
     prepend: '`simpless` is yet another less wrapper. This one will:\n\n- parse your `less` files\n- allow you to include several files using `less-plugin-glob`\n- inline small url files into the output css file\n- copy the urls that cannot be inlined to a folder relative to the output\n\n========================================================\nUsage: simpless [options] glob [glob1] [glob2]..[globN]\n========================================================',
@@ -59,6 +59,11 @@ module.exports = {
         alias: 'r',
         type: 'String',
         description: 'The revision to use in the file names and assets, for example the build number or other number to identify this resource'
+      },
+      {
+        option: 'banner',
+        type: 'String',
+        description: 'The banner to put at the top of the compiled files'
       }
     ]
   }
