@@ -57,6 +57,19 @@
     "postcss": "^4.1.11",
     "stringformat": "0.0.5"
   },
+  "changelogx": {
+    "ignoreRegExp": [
+      "BLD: Release",
+      "DOC: Generate Changelog",
+      "Generated Changelog",
+      "REF: formatted missing files"
+    ],
+    "issueIDRegExp": "#(\\d+)",
+    "commitURL": "https://github.com/royriojas/simpless/commit/{0}",
+    "authorURL": "https://github.com/{0}",
+    "issueIDURL": "https://github.com/royriojas/simpless/issues/{0}",
+    "projectName": "simpless"
+  },
   "bugs": {
     "url": "https://github.com/royriojas/simpless/issues"
   },
