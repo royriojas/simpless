@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v1.0.2
+- **Features**
+  - Add banner option - [6efe9a8]( https://github.com/royriojas/simpless/commit/6efe9a8 ), [royriojas](https://github.com/royriojas), 07/06/2015 20:56:22
+
+    
 ## v1.0.1
 - **Documentation**
   - Add documentation about simpless module - [792144d]( https://github.com/royriojas/simpless/commit/792144d ), [royriojas](https://github.com/royriojas), 01/06/2015 03:47:19
