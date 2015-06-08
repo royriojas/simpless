@@ -37,8 +37,7 @@ module.exports = {
     var util = require( 'util' );
 
     simpless.on( 'error', function ( e, err ) {
-
-      cli.error( 'Error parsing less file\n\n', util.inspect( err ) );
+      cli.error( 'Error parsing less file\n\n', err.message );
     } );
 
     simpless.on( 'resource:copied', function ( e, args ) {
