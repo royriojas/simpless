@@ -155,6 +155,7 @@ module.exports = {
             compress: false,
             dumpLineNumbers: 'comments'
           },
+          userFns: {},
           cssoOptions: {
             structureModifications: false
           }
@@ -177,7 +178,7 @@ module.exports = {
           me.fire( 'compile:file', {
             file: file
           } );
-          return compileLess( file, opts.lessOptions ).then( function ( result ) {
+          return compileLess( file, opts.lessOptions, opts.userFns ).then( function ( result ) {
 
             if ( opts.copyAssetsToDestFolder ) {
               result = me.rewriteURLS( result, file, path.dirname( dest ), opts );
@@ -211,7 +212,7 @@ module.exports = {
 
           var banner = opts.banner ? opts.banner + os.EOL : '';
 
-          write( dest, (banner + result) );
+          write( dest, (banner + result ) );
 
           me.fire( 'write:file', args );
 
@@ -221,7 +222,7 @@ module.exports = {
             var minimized = csso.justDoIt( result, !!cssoOptions.structureModifications );
             var minimizedDest = makeMinName( dest );
 
-            write( minimizedDest, (banner + minimized) );
+            write( minimizedDest, (banner + minimized ) );
 
             me.fire( 'write:minimized', extend( {}, args, {
               dest: minimizedDest

@@ -6,6 +6,7 @@ module.exports = {
   run: function ( cli ) {
     var expand = require( 'glob-expand' );
     //var console = require( './../lib/console' );
+    var extend = require('extend');
 
     //var sFormat = require( 'stringformat' );
     var path = require( 'path' );
@@ -54,10 +55,7 @@ module.exports = {
 
     cli.subtle( 'options', util.inspect( opts ) );
 
-    simpless.process( {
-      src: files,
-      dest: path.resolve( process.cwd(), opts.output )
-    }, {
+    var simplessOpts = {
       banner: opts.banner,
       minimize: opts.minimize,
       revision: opts.revision,
@@ -69,6 +67,24 @@ module.exports = {
       cssoOptions: {
         structureModifications: opts.advanceMin
       }
-    } );
+    };
+
+
+    var userFns = require('../lib/default-user-fns');
+
+    if ( opts.userFunctions ) {
+      try {
+        extend(userFns, require( path.resolve( process.cwd(), opts.userFunctions ) ));
+      } catch (ex) {
+        cli.subtle( 'Error loading custom functions', ex );
+      }
+    }
+
+    simplessOpts.userFns = userFns;
+
+    simpless.process( {
+      src: files,
+      dest: path.resolve( process.cwd(), opts.output )
+    }, simplessOpts );
   }
 };
