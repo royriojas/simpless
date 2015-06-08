@@ -1,6 +1,6 @@
 
 # simpless - Changelog
-## HEAD
+## v1.0.6
 - **Build Scripts Changes**
   - Add changelogx section to package.json - [c74747b]( https://github.com/royriojas/simpless/commit/c74747b ), [royriojas](https://github.com/royriojas), 08/06/2015 01:46:20
 
