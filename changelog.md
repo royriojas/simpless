@@ -1,5 +1,13 @@
 
 # simpless - Changelog
+## HEAD
+- **Build Scripts Changes**
+  - Add changelogx section to package.json - [c74747b]( https://github.com/royriojas/simpless/commit/c74747b ), [royriojas](https://github.com/royriojas), 08/06/2015 01:46:20
+
+    
+  - remove unused files in the module - [90e4a9a]( https://github.com/royriojas/simpless/commit/90e4a9a ), [royriojas](https://github.com/royriojas), 08/06/2015 01:42:32
+
+    
 ## v1.0.5
 - **Build Scripts Changes**
   - remove unused files in the module - [eaabd7b]( https://github.com/royriojas/simpless/commit/eaabd7b ), [royriojas](https://github.com/royriojas), 08/06/2015 01:40:45
