@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v1.0.7
+- **Enhancements**
+  - Better error reporting on less failure - [5efc53a]( https://github.com/royriojas/simpless/commit/5efc53a ), [royriojas](https://github.com/royriojas), 08/06/2015 02:09:25
+
+    
 ## v1.0.6
 - **Build Scripts Changes**
   - Add changelogx section to package.json - [c74747b]( https://github.com/royriojas/simpless/commit/c74747b ), [royriojas](https://github.com/royriojas), 08/06/2015 01:46:20
