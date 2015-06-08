@@ -1,5 +1,14 @@
 
 # simpless - Changelog
+## v1.0.3
+- **Documentation**
+  - Update the Readme with the latest changes - [4fb217a]( https://github.com/royriojas/simpless/commit/4fb217a ), [royriojas](https://github.com/royriojas), 08/06/2015 01:35:43
+
+    
+- **Features**
+  - Implement the option to add user functions - [d850937]( https://github.com/royriojas/simpless/commit/d850937 ), [royriojas](https://github.com/royriojas), 08/06/2015 01:35:30
+
+    
 ## v1.0.2
 - **Features**
   - Add banner option - [6efe9a8]( https://github.com/royriojas/simpless/commit/6efe9a8 ), [royriojas](https://github.com/royriojas), 07/06/2015 20:56:22
