@@ -6,7 +6,7 @@ module.exports = {
   run: function ( cli ) {
     var expand = require( 'glob-expand' );
     //var console = require( './../lib/console' );
-    var extend = require('extend');
+    var extend = require( 'extend' );
 
     //var sFormat = require( 'stringformat' );
     var path = require( 'path' );
@@ -70,11 +70,11 @@ module.exports = {
     };
 
 
-    var userFns = require('../lib/default-user-fns');
+    var userFns = require( '../lib/default-user-fns' );
 
     if ( opts.userFunctions ) {
       try {
-        extend(userFns, require( path.resolve( process.cwd(), opts.userFunctions ) ));
+        extend( userFns, require( path.resolve( process.cwd(), opts.userFunctions ) ) );
       } catch (ex) {
         cli.subtle( 'Error loading custom functions', ex );
       }
