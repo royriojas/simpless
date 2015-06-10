@@ -1,0 +1,14 @@
+@someVar: 16px;
+@import 'base/base';
+@import 'base/other';
+
+.demo {
+  line-height: calc-em(16px);
+  display:flex;
+  font-size: calc-em(18px);
+  flex-direction: column;
+  width: rel-val(800px, 1140px);
+  background:url('./assets/bunny.JPG');
+  top: 20px
+  left: 30px;
+}
