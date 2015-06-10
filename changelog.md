@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v1.0.9
+- **Build Scripts Changes**
+  - remove demo files from the module - [1f0a40e]( https://github.com/royriojas/simpless/commit/1f0a40e ), [royriojas](https://github.com/royriojas), 09/06/2015 22:27:13
+
+    
 ## v1.0.8
 - **Enhancements**
   - Better error reporting on auto-prefix failure. Fixes [#1](https://github.com/royriojas/simpless/issues/1) - [6ca8864]( https://github.com/royriojas/simpless/commit/6ca8864 ), [royriojas](https://github.com/royriojas), 09/06/2015 19:31:56
