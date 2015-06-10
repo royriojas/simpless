@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v1.0.8
+- **Enhancements**
+  - Better error reporting on auto-prefix failure. Fixes [#1](https://github.com/royriojas/simpless/issues/1) - [6ca8864]( https://github.com/royriojas/simpless/commit/6ca8864 ), [royriojas](https://github.com/royriojas), 09/06/2015 19:31:56
+
+    
 ## v1.0.7
 - **Enhancements**
   - Better error reporting on less failure - [5efc53a]( https://github.com/royriojas/simpless/commit/5efc53a ), [royriojas](https://github.com/royriojas), 08/06/2015 02:09:25
