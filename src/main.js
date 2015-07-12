@@ -2,15 +2,14 @@
 
 module.exports = {
   dirname: __dirname,
-
   run: function ( cli ) {
     var expand = require( 'glob-expand' );
     //var console = require( './../lib/console' );
     var extend = require( 'extend' );
 
-    //var sFormat = require( 'stringformat' );
     var path = require( 'path' );
     var process = require( './../lib/process' );
+    //var watcher = require('../lib/watcher')
 
     var opts = cli.opts;
 
@@ -33,7 +32,39 @@ module.exports = {
       return;
     }
 
-    var simpless = require( '../index' ).create();
+    var simplessOpts = {
+      watch: opts.watch,
+      watchDelay: opts.watchDelay,
+      banner: opts.banner,
+      minimize: opts.minimize,
+      revision: opts.revision,
+      assetsPathFormat: opts.assetsPathFormat,
+      copyAssetsToDestFolder: opts.copyAssetsTo,
+      autoprefixer: {
+        browsers: opts.browsers
+      },
+      cssoOptions: {
+        structureModifications: opts.advanceMin
+      }
+    };
+
+    var userFns = {};//require( '../lib/default-user-fns' );
+
+    if ( opts.userFunctions ) {
+      try {
+        extend( userFns, require( path.resolve( process.cwd(), opts.userFunctions ) ) );
+      } catch (ex) {
+        cli.subtle( 'Error loading custom functions', ex );
+      }
+    }
+
+    simplessOpts.userFns = userFns;
+
+    var simpless = require( '../lib/watcher' ).create( {
+      src: files,
+      dest: path.resolve( process.cwd(), opts.output )
+    }, simplessOpts );
+
     var util = require( 'util' );
 
     simpless.on( 'error', function ( e, err ) {
@@ -52,38 +83,25 @@ module.exports = {
       cli.ok( 'File written:', args.dest );
     } );
 
-    cli.subtle( 'options', util.inspect( opts ) );
+    simpless.on( 'deps:changed', function ( e, args ) {
+      cli.subtle( 'files changed', '\n   - ' + args.files.join( '\n   - ' ) );
+      simpless.process();
+    } );
 
-    var simplessOpts = {
-      banner: opts.banner,
-      minimize: opts.minimize,
-      revision: opts.revision,
-      assetsPathFormat: opts.assetsPathFormat,
-      copyAssetsToDestFolder: opts.copyAssetsToDestFolder,
-      autoprefixer: {
-        browsers: opts.browsers
-      },
-      cssoOptions: {
-        structureModifications: opts.advanceMin
-      }
+    simpless.on( 'watch:start', function ( e, args ) {
+      cli.subtle( 'watch mode started.', '\n\n', 'watching the following files\n   - ' + args.files.join( '\n   - ' ), '\n\n', 'Wating for changes...' );
+    } );
+
+    var removeWatcher = function () {
+      simpless.closeWatcher && simpless.closeWatcher();
     };
 
+    process.on( 'uncaughtException', removeWatcher );
+    process.on( 'beforeExit', removeWatcher );
 
-    var userFns = require( '../lib/default-user-fns' );
+    cli.subtle( 'options', util.inspect( opts ) );
 
-    if ( opts.userFunctions ) {
-      try {
-        extend( userFns, require( path.resolve( process.cwd(), opts.userFunctions ) ) );
-      } catch (ex) {
-        cli.subtle( 'Error loading custom functions', ex );
-      }
-    }
+    simpless.process();
 
-    simplessOpts.userFns = userFns;
-
-    simpless.process( {
-      src: files,
-      dest: path.resolve( process.cwd(), opts.output )
-    }, simplessOpts );
   }
 };

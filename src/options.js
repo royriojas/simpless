@@ -9,7 +9,7 @@ module.exports = {
   //  },
   //useDefaultOptions: true,
   optionator: {
-    prepend: '`simpless` is yet another less wrapper. This one will:\n\n- parse your `less` files\n- allow you to include several files using `less-plugin-glob`\n- inline small url files into the output css file\n- copy the urls that cannot be inlined to a folder relative to the output\n\n========================================================\nUsage: simpless [options] glob [glob1] [glob2]..[globN]\n========================================================',
+    prepend: '`simpless` is yet another less wrapper. This one will:\n\n- parse your `less` files\n- allow you to include several files using `less-plugin-glob` `@import "some/glob/**/*.less"\n- inline small url files into the output css file\n- copy the urls that cannot be inlined to a folder relative to the output\n- provide a watch mode to rebuild the css on any change of the entry file and any of its dependencies\n- will make you happy!. Well maybe, at least I hope it will do its best effort!\n\n========================================================\nUsage: simpless [options] glob [glob1] [glob2]..[globN]\n========================================================',
     options: [
       {
         heading: 'Options'
@@ -22,21 +22,21 @@ module.exports = {
         example: 'simpless src/in.less -b "last 2 versions" -o dest/out.css'
       },
       {
-        option: 'advanceMin',
+        option: 'advance-min',
         alias: 'a',
         dependsOn: 'minimize',
         type: 'Boolean',
         description: 'Whether or not to apply more risky structural optimizations for CSS. By Default is `false`. Use it with care. Requires --minimize'
       },
       {
-        option: 'copyAssetsToDestFolder',
+        option: 'copy-assets-to',
         alias: 'c',
         type: 'Boolean',
         'default': 'true',
         description: 'Copy the assets to the destination folder. By default is `true`'
       },
       {
-        option: 'assetsPathFormat',
+        option: 'assets-path-format',
         alias: 'p',
         type: 'String',
         dependsOn: 'copyAssetsToDestFolder',
@@ -47,6 +47,19 @@ module.exports = {
         alias: 'm',
         type: 'Boolean',
         description: 'Whether to minimize or not the output or not. By default is `false`. When the flag is set both the non minimified and minified versions will be created'
+      },
+      {
+        option: 'watch',
+        alias: 'w',
+        type: 'Boolean',
+        description: 'wait for changes on the files and dependencies to rebuild the target'
+      },
+      {
+        option: 'watch-delay',
+        alias: 'd',
+        type: 'Number',
+        default: '600',
+        description: 'Amount of time in milliseconds to wait before emitting an "update" event after a change'
       },
       {
         option: 'output',
