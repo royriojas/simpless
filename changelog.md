@@ -1,5 +1,18 @@
 
 # simpless - Changelog
+## v2.0.1
+- **Build Scripts Changes**
+  - Include a script to automate the changelog generation - [cfb6cee]( https://github.com/royriojas/simpless/commit/cfb6cee ), [royriojas](https://github.com/royriojas), 12/07/2015 01:48:21
+
+    
+- **Bug Fixes**
+  - include default user functions again, removed by mistake - [34e6b1a]( https://github.com/royriojas/simpless/commit/34e6b1a ), [royriojas](https://github.com/royriojas), 12/07/2015 01:47:58
+
+    
+- **Documentation**
+  - Update changelog - [5e995c4]( https://github.com/royriojas/simpless/commit/5e995c4 ), [royriojas](https://github.com/royriojas), 12/07/2015 01:44:18
+
+    
 ## v2.0.0
 - **Documentation**
   - Add some notes about the lack of colored output - [d79bd27]( https://github.com/royriojas/simpless/commit/d79bd27 ), [royriojas](https://github.com/royriojas), 12/07/2015 01:43:39
