@@ -102,8 +102,8 @@ simpless -o demo/dest/demo.css demo/src/demo-with-fns.less -ma -u './path/to/cus
 # generate the combined output of demo.css and demo-with-fns.less using --colored-ouput and a delay of 250ms
 simpless -w -o demo/dest/demo.css demo/src/demo.less demo/src/demo-with-fns.less --colored-output -d 250
 
-# include customFunctions
-simpless --user-functions lib/default-user-fns.js
+# Same as above but include customFunctions js file
+simpless -u lib/default-user-fns.js -w -o demo/dest/demo.css demo/src/demo.less demo/src/demo-with-fns.less --colored-output -d 250
 ```
 
 ## [Changelog](./changelog.md)

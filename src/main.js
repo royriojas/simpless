@@ -48,7 +48,7 @@ module.exports = {
       }
     };
 
-    var userFns = {};//require( '../lib/default-user-fns' );
+    var userFns = require( '../lib/default-user-fns' );
 
     if ( opts.userFunctions ) {
       try {
