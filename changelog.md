@@ -1,5 +1,25 @@
 
 # simpless - Changelog
+## v2.0.0
+- **Documentation**
+  - Add some notes about the lack of colored output - [d79bd27]( https://github.com/royriojas/simpless/commit/d79bd27 ), [royriojas](https://github.com/royriojas), 12/07/2015 01:43:39
+
+    
+  - Updated demo files - [25e8ebf]( https://github.com/royriojas/simpless/commit/25e8ebf ), [royriojas](https://github.com/royriojas), 12/07/2015 01:37:30
+
+    
+- **Features**
+  - Add watch mode to simpless - [8fb4ca4]( https://github.com/royriojas/simpless/commit/8fb4ca4 ), [royriojas](https://github.com/royriojas), 12/07/2015 01:41:29
+
+    The watch mode works by setting listeners on:
+    
+    - the entry file
+    - the referenced files (by using `url()` in the css properties) this is
+    currently done by using regular expressions, would be nice to changed
+    it to use the parsed tree instead.
+    - the imported files inside the first one and the ones in any imported
+    less file (by using the imports property of the `less.render` method)
+    
 ## v1.0.9
 - **Build Scripts Changes**
   - remove demo files from the module - [1f0a40e]( https://github.com/royriojas/simpless/commit/1f0a40e ), [royriojas](https://github.com/royriojas), 09/06/2015 22:27:13
