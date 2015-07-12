@@ -15,6 +15,8 @@
   functions to `less`.
 
 **TODO: Add a cache mode for incremental builds**
+**NOTE**:
+The module used to have colored output. It has being removed because not all terminals use the same color scheme. `--colored-ouput` can be used to get the colored output back
 
 ## Motivation
 Just wanted to have a good wrapper to process my less resources, without having to manually install all of the dependencies.
