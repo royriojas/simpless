@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v2.0.2
+- **Documentation**
+  - fix issue with the style of the readme - [0c30c0a]( https://github.com/royriojas/simpless/commit/0c30c0a ), [royriojas](https://github.com/royriojas), 12/07/2015 01:55:35
+
+    
 ## v2.0.1
 - **Build Scripts Changes**
   - Include a script to automate the changelog generation - [cfb6cee]( https://github.com/royriojas/simpless/commit/cfb6cee ), [royriojas](https://github.com/royriojas), 12/07/2015 01:48:21
