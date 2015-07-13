@@ -72,24 +72,41 @@ module.exports = {
     } );
 
     simpless.on( 'resource:copied', function ( e, args ) {
-      cli.subtle( 'resource copied from:', args.from, 'to:', args.to );
+      cli.print( '\nresource copied\n- from:  ' + args.from + '\n- to:  ' + args.to + '\n' );
     } );
 
     simpless.on( 'url:replaced', function ( e, args ) {
-      cli.subtle( 'url replaced from:', args.from, 'to:', args.to );
+      cli.print( '\rurl replaced\n- from:  ' + args.from + '\n- to:  ' + args.to );
     } );
 
+    var startTime;
+    var startProcess = function () {
+      startTime = Date.now();
+      simpless.process().then( function () {
+        if ( opts.watch ) {
+          cli.ok( 'Watching for changes...' );
+          return;
+        }
+        cli.ok( 'Done!' );
+      } );
+    };
+
     simpless.on( 'write:file write:minimized', function ( e, args ) {
-      cli.ok( 'File written:', args.dest );
+      var now = Date.now();
+      var delta = now - startTime;
+      startTime = now;
+      (e.type === 'write:file') && cli.print( '' );
+      cli.success( 'File written:', args.dest, delta + 'ms' );
     } );
 
     simpless.on( 'deps:changed', function ( e, args ) {
       cli.subtle( 'files changed', '\n   - ' + args.files.join( '\n   - ' ) );
-      simpless.process();
+      startProcess();
     } );
 
-    simpless.on( 'watch:start', function ( e, args ) {
-      cli.subtle( 'watch mode started.', '\n\n', 'watching the following files\n   - ' + args.files.join( '\n   - ' ), '\n\n', 'Wating for changes...' );
+    simpless.one( 'watch:start', function ( e, args ) {
+      cli.print( '' );
+      cli.subtle( 'watch mode started.', '\n\n', 'watching the following files\n   - ' + args.files.join( '\n   - ' ), '\n\n' );
     } );
 
     var removeWatcher = function () {
@@ -101,7 +118,7 @@ module.exports = {
 
     cli.subtle( 'options', opts );
 
-    simpless.process();
+    startProcess();
 
   }
 };
