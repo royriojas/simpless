@@ -1,6 +1,6 @@
 {
   "name": "simpless",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Simple wrapper around esformatter to beautify javascript files overriding the content of the files",
   "main": "index.js",
   "scripts": {
