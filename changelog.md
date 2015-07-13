@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v2.0.4
+- **Enhancements**
+  - Improved log messages - [cbbc2ef]( https://github.com/royriojas/simpless/commit/cbbc2ef ), [royriojas](https://github.com/royriojas), 13/07/2015 01:04:47
+
+    
 ## v2.0.3
 - **Refactoring**
   - remove not needed call to util inspect - [eced4d1]( https://github.com/royriojas/simpless/commit/eced4d1 ), [royriojas](https://github.com/royriojas), 13/07/2015 00:10:44
