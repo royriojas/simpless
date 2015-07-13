@@ -31,10 +31,10 @@
     "npm run check"
   ],
   "devDependencies": {
-    "bumpery": "^1.0.7",
-    "changelogx": "^1.0.13",
-    "esbeautifier": "^3.1.3",
-    "eslinter": "^2.0.1",
+    "bumpery": "^1.1.1",
+    "changelogx": "^1.0.15",
+    "esbeautifier": "^3.2.0",
+    "eslinter": "^2.0.5",
     "istanbul": "^0.3.17",
     "mocha-runner": "^1.0.8",
     "prepush": "^2.0.4",
