@@ -1,5 +1,26 @@
 
 # simpless - Changelog
+## v2.0.3
+- **Refactoring**
+  - remove not needed call to util inspect - [eced4d1]( https://github.com/royriojas/simpless/commit/eced4d1 ), [royriojas](https://github.com/royriojas), 13/07/2015 00:10:44
+
+    
+- **Bug Fixes**
+  - Proper error reporting of the file causing the parse issue from less - [c9eab6e]( https://github.com/royriojas/simpless/commit/c9eab6e ), [royriojas](https://github.com/royriojas), 13/07/2015 00:10:15
+
+    
+- **Build Scripts Changes**
+  - Update deps - [f0b62f7]( https://github.com/royriojas/simpless/commit/f0b62f7 ), [royriojas](https://github.com/royriojas), 13/07/2015 00:09:29
+
+    
+  - Updated clix dep for the ability to set the colored output flag using an environment flag - [417dda0]( https://github.com/royriojas/simpless/commit/417dda0 ), [royriojas](https://github.com/royriojas), 12/07/2015 23:44:24
+
+    In your profile add the following line to have the colored output back without having to specify the flag --colored-output
+    
+    ```bash
+    export __CLIX_COLORED_OUTPUT__=true
+    ```
+    
 ## v2.0.2
 - **Documentation**
   - fix issue with the style of the readme - [0c30c0a]( https://github.com/royriojas/simpless/commit/0c30c0a ), [royriojas](https://github.com/royriojas), 12/07/2015 01:55:35
