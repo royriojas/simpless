@@ -65,7 +65,7 @@ module.exports = {
       dest: path.resolve( process.cwd(), opts.output )
     }, simplessOpts );
 
-    var util = require( 'util' );
+    //var util = require( 'util' );
 
     simpless.on( 'error', function ( e, err ) {
       cli.error( 'Error parsing less file\n\n', err.message );
@@ -99,7 +99,7 @@ module.exports = {
     process.on( 'uncaughtException', removeWatcher );
     process.on( 'beforeExit', removeWatcher );
 
-    cli.subtle( 'options', util.inspect( opts ) );
+    cli.subtle( 'options', opts );
 
     simpless.process();
 
