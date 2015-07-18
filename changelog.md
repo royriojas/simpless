@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v2.0.5
+- **Build Scripts Changes**
+  - Fix the description of the module - [ce10111]( https://github.com/royriojas/simpless/commit/ce10111 ), [royriojas](https://github.com/royriojas), 17/07/2015 20:23:54
+
+    
 ## v2.0.4
 - **Enhancements**
   - Improved log messages - [cbbc2ef]( https://github.com/royriojas/simpless/commit/cbbc2ef ), [royriojas](https://github.com/royriojas), 13/07/2015 01:04:47
