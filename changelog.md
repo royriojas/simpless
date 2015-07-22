@@ -1,5 +1,13 @@
 
 # simpless - Changelog
+## v2.0.6-0
+- **Build Scripts Changes**
+  - Upgrade to 2.0.6-0 to try the less compiler from the branch with faster compile time - [a64f72f]( https://github.com/royriojas/simpless/commit/a64f72f ), [royriojas](https://github.com/royriojas), 22/07/2015 14:22:00
+
+    
+  - Add less from the branch to speed up compile time - [58ec719]( https://github.com/royriojas/simpless/commit/58ec719 ), [royriojas](https://github.com/royriojas), 22/07/2015 14:04:45
+
+    
 ## v2.0.5
 - **Build Scripts Changes**
   - Fix the description of the module - [ce10111]( https://github.com/royriojas/simpless/commit/ce10111 ), [royriojas](https://github.com/royriojas), 17/07/2015 20:23:54
