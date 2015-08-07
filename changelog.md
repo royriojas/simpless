@@ -1,5 +1,18 @@
 
 # simpless - Changelog
+## v2.0.7
+- **Build Scripts Changes**
+  - update dependencies and build script - [f33039e]( https://github.com/royriojas/simpless/commit/f33039e ), [royriojas](https://github.com/royriojas), 07/08/2015 15:09:02
+
+    
+  - remove modules that are `devDependencies` from the `dependencies` section - [0680caf]( https://github.com/royriojas/simpless/commit/0680caf ), [royriojas](https://github.com/royriojas), 07/08/2015 14:35:16
+
+    
+## v2.0.6
+- **Build Scripts Changes**
+  - attempt to use the beta version - [98dc7e4]( https://github.com/royriojas/simpless/commit/98dc7e4 ), [royriojas](https://github.com/royriojas), 22/07/2015 14:26:52
+
+    
 ## v2.0.6-0
 - **Build Scripts Changes**
   - Upgrade to 2.0.6-0 to try the less compiler from the branch with faster compile time - [a64f72f]( https://github.com/royriojas/simpless/commit/a64f72f ), [royriojas](https://github.com/royriojas), 22/07/2015 14:22:00
