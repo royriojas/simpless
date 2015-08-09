@@ -29,7 +29,7 @@ module.exports = {
         description: 'Whether or not to apply more risky structural optimizations for CSS. By Default is `false`. Use it with care. Requires --minimize'
       },
       {
-        option: 'copy-assets-to',
+        option: 'copy-assets',
         alias: 'c',
         type: 'Boolean',
         'default': 'true',

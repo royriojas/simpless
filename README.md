@@ -53,7 +53,7 @@ Options:
   -b, --browsers [String]      the browsers to autoprefix. Default is `last 2 browsers`
   -a, --advance-min            Whether or not to apply more risky structural optimizations for CSS. By Default is `false`. Use it with care. Requires
                                --minimize
-  -c, --copy-assets-to         Copy the assets to the destination folder. By default is `true` - default: true
+  -c, --copy-assets            Copy the assets to the destination folder. By default is `true` - default: true
   -p, --assets-path-format String  The format of the assets rewrite path. By default is `assets/{REVISION}_{GUID}_{FNAME}` where {REVISION} is the revision
                                    passed to the command, {GUID} the unique indetifier or the resource and {FNAME} the filename.
   -m, --minimize               Whether to minimize or not the output or not. By default is `false`. When the flag is set both the non minimified and
@@ -67,7 +67,7 @@ Options:
                                function itself
   -h, --help                   Show this help
   -v, --version                Outputs the version number
-  -q, --quiet                  Show only the summary info
+  -q, --quiet                  Show only the summary info - default: false
   --colored-output             Use colored output in logs
 ```
 

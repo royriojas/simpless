@@ -39,7 +39,7 @@ module.exports = {
       minimize: opts.minimize,
       revision: opts.revision,
       assetsPathFormat: opts.assetsPathFormat,
-      copyAssetsToDestFolder: opts.copyAssetsTo,
+      copyAssetsToDestFolder: opts.copyAssets,
       autoprefixer: {
         browsers: opts.browsers
       },
@@ -83,7 +83,7 @@ module.exports = {
     var startProcess = function () {
       startTime = Date.now();
       simpless.process().then( function () {
-        if ( opts.watch ) {
+        if ( simplessOpts.watch ) {
           cli.ok( 'Watching for changes...' );
           return;
         }
