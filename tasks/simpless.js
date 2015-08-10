@@ -29,11 +29,10 @@ module.exports = function ( grunt ) {
     opts.userFns = extend( true, require( '../lib/default-user-fns' ), opts.userFns );
 
     var fileEntries = me.files || [ ];
+    var banner = grunt.template.process( opts.banner );
 
     var p = fileEntries.reduce( function ( seq, data ) {
       return seq.then( function () {
-
-        var banner = grunt.template.process( opts.banner );
         return new ES6Promise( function ( resolve ) {
           var util = require( 'util' );
 
@@ -115,6 +114,9 @@ module.exports = function ( grunt ) {
         return;
       }
       done();
+    }, function (err) {
+      logger.error(err);
+      throw err;
     } );
 
   } );

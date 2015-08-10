@@ -1,7 +1,10 @@
 describe( 'lib', function () {
   var expand = require( 'glob-expand' );
   //var write = require('write').sync;
-  var read = require( 'read-file' ).readFileSync;
+  var read = function ( path ) {
+    return require( 'fs' ).readFileSync( path, { encoding: 'utf8' } );
+  };
+
   var path = require( 'path' );
 
   describe( 'strip-comments', function () {
