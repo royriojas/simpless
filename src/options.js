@@ -2,11 +2,11 @@ var path = require( 'path' );
 
 module.exports = {
   pkgJSONPath: path.resolve( __dirname, '../package.json' ),
-  //  configFile: {
-  //    defaultName: 'package.json',
-  //    pathToLocalConfig: path.resolve( __dirname, '../configs/simpless.json' ),
-  //    description: 'Path to your `simpless` config, if not provided will try to use the `package.json` file in your current working directory, expecting an entry called `simpless`, if not found will use the one provided with this package'
-  //  },
+  configFile: {
+    // defaultName: 'package.json',
+    //   pathToLocalConfig: path.resolve( __dirname, '../configs/simpless.json' ),
+    description: 'Path to your `simpless.conf.js` config, if provided all the other parameters will be ignored'
+  },
   //useDefaultOptions: true,
   optionator: {
     prepend: '`simpless` is yet another less wrapper. This one will:\n\n- parse your `less` files\n- allow you to include several files using `less-plugin-glob` `@import "some/glob/**/*.less"\n- inline small url files into the output css file\n- copy the urls that cannot be inlined to a folder relative to the output\n- provide a watch mode to rebuild the css on any change of the entry file and any of its dependencies\n- will make you happy!. Well maybe, at least I hope it will do its best effort!\n\n========================================================\nUsage: simpless [options] glob [glob1] [glob2]..[globN]\n========================================================',
@@ -14,6 +14,12 @@ module.exports = {
       {
         heading: 'Options'
       },
+      // {
+      //   config: 'config',
+      //   alias: 'c',
+      //   type: 'String',
+      //   description: 'Path to your `simpless.conf.js`'
+      // },
       {
         option: 'browsers',
         alias: 'b',
@@ -30,7 +36,7 @@ module.exports = {
       },
       {
         option: 'copy-assets',
-        alias: 'c',
+        alias: 'k',
         type: 'Boolean',
         'default': 'true',
         description: 'Copy the assets to the destination folder. By default is `true`'
