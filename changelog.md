@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v3.0.2
+- **Bug Fixes**
+  - missing write dep - [931e89d]( https://github.com/royriojas/simpless/commit/931e89d ), [royriojas](https://github.com/royriojas), 09/08/2015 19:19:59
+
+    
 ## v3.0.1
 - **Bug Fixes**
   - remove missing read-file dependency - [23d94b6]( https://github.com/royriojas/simpless/commit/23d94b6 ), [royriojas](https://github.com/royriojas), 09/08/2015 19:13:57
