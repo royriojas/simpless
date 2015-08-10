@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v3.0.1
+- **Bug Fixes**
+  - remove missing read-file dependency - [23d94b6]( https://github.com/royriojas/simpless/commit/23d94b6 ), [royriojas](https://github.com/royriojas), 09/08/2015 19:13:57
+
+    
 ## v3.0.0
 - **Features**
   - Add grunt-task - [fed0b0e]( https://github.com/royriojas/simpless/commit/fed0b0e ), [royriojas](https://github.com/royriojas), 09/08/2015 17:57:58
