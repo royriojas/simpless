@@ -46,8 +46,7 @@
     "precommit": "^1.1.2",
     "prepush": "^3.1.2",
     "proxyquire": "^1.6.0",
-    "watch-spawn": "^1.0.3",
-    "write": "^0.2.0"
+    "watch-spawn": "^1.0.3"
   },
   "dependencies": {
     "autoprefixer-core": "^5.2.0",
@@ -65,7 +64,8 @@
     "less-plugin-inline-urls": "^1.1.0",
     "moment": "^2.10.6",
     "postcss": "^4.1.11",
-    "stringformat": "0.0.5"
+    "stringformat": "0.0.5",
+    "write": "^0.2.0"
   },
   "changelogx": {
     "ignoreRegExp": [
