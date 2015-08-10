@@ -1,5 +1,18 @@
 
 # simpless - Changelog
+## v3.0.0
+- **Features**
+  - Add grunt-task - [fed0b0e]( https://github.com/royriojas/simpless/commit/fed0b0e ), [royriojas](https://github.com/royriojas), 09/08/2015 17:57:58
+
+    
+- **Refactoring**
+  - rename `copy-assets-to` option to `copy-assets` - [b3dbde1]( https://github.com/royriojas/simpless/commit/b3dbde1 ), [royriojas](https://github.com/royriojas), 09/08/2015 16:50:37
+
+    
+- **Build Scripts Changes**
+  - Update clix dependency to get better log messages - [b89173d]( https://github.com/royriojas/simpless/commit/b89173d ), [royriojas](https://github.com/royriojas), 09/08/2015 16:49:31
+
+    
 ## v2.0.7
 - **Build Scripts Changes**
   - update dependencies and build script - [f33039e]( https://github.com/royriojas/simpless/commit/f33039e ), [royriojas](https://github.com/royriojas), 07/08/2015 15:09:02
