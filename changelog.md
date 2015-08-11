@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v3.0.3
+- **Bug Fixes**
+  - missing clix-logger dep - [a901bfd]( https://github.com/royriojas/simpless/commit/a901bfd ), [royriojas](https://github.com/royriojas), 11/08/2015 11:53:39
+
+    
 ## v3.0.2
 - **Bug Fixes**
   - missing write dep - [931e89d]( https://github.com/royriojas/simpless/commit/931e89d ), [royriojas](https://github.com/royriojas), 09/08/2015 19:19:59
