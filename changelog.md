@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v3.0.4
+- **Build Scripts Changes**
+  - update clix dep to get nicer log output - [8533d35]( https://github.com/royriojas/simpless/commit/8533d35 ), [royriojas](https://github.com/royriojas), 11/08/2015 17:41:59
+
+    
 ## v3.0.3
 - **Bug Fixes**
   - missing clix-logger dep - [a901bfd]( https://github.com/royriojas/simpless/commit/a901bfd ), [royriojas](https://github.com/royriojas), 11/08/2015 11:53:39
