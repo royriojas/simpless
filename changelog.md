@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v3.0.5
+- **Refactoring**
+  - use more verbose logs - [0706879]( https://github.com/royriojas/simpless/commit/0706879 ), [royriojas](https://github.com/royriojas), 12/08/2015 23:30:25
+
+    
 ## v3.0.4
 - **Build Scripts Changes**
   - update clix dep to get nicer log output - [8533d35]( https://github.com/royriojas/simpless/commit/8533d35 ), [royriojas](https://github.com/royriojas), 11/08/2015 17:41:59
