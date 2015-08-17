@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v3.0.6
+- **Refactoring**
+  - Add support for grunt style configuration file - [2a7f697]( https://github.com/royriojas/simpless/commit/2a7f697 ), [royriojas](https://github.com/royriojas), 16/08/2015 19:57:21
+
+    
 ## v3.0.5
 - **Refactoring**
   - use more verbose logs - [0706879]( https://github.com/royriojas/simpless/commit/0706879 ), [royriojas](https://github.com/royriojas), 12/08/2015 23:30:25
