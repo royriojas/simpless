@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v3.0.7
+- **Features**
+  - allow to specify more than on task to run at a time - [7f3d7cf]( https://github.com/royriojas/simpless/commit/7f3d7cf ), [royriojas](https://github.com/royriojas), 17/08/2015 02:06:31
+
+    
 ## v3.0.6
 - **Refactoring**
   - Add support for grunt style configuration file - [2a7f697]( https://github.com/royriojas/simpless/commit/2a7f697 ), [royriojas](https://github.com/royriojas), 16/08/2015 19:57:21
