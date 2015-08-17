@@ -7,6 +7,7 @@ module.exports = function ( grunt ) {
   grunt.registerMultiTask( 'simpless', function ( watch ) {
     var me = this;
     var logger = require( 'clix-logger/logger' );
+    var verbose = grunt.option('verbose');
 
     var done = me.async();
 
@@ -55,7 +56,7 @@ module.exports = function ( grunt ) {
 
           simpless.on( 'error', function ( e, err ) {
             if ( opts.watch ) {
-              logger.log( 'Error parsing less file\n\n', err.message );
+              logger.error( 'Error parsing less file\n\n', err.message );
               return;
             }
             logger.error( 'Error parsing less file' );
@@ -63,11 +64,11 @@ module.exports = function ( grunt ) {
           } );
 
           simpless.on( 'resource:copied', function ( e, args ) {
-            logger.log( '\nresource copied\n- from:  ' + args.from + '\n- to:  ' + args.to + '\n' );
+            verbose && logger.print( '\nresource copied\n- from:  ' + args.from + '\n- to:  ' + args.to + '\n' );
           } );
 
           simpless.on( 'url:replaced', function ( e, args ) {
-            logger.log( '\rurl replaced\n- from:  ' + args.from + '\n- to:  ' + args.to );
+            verbose && logger.print( '\rurl replaced\n- from:  ' + args.from + '\n- to:  ' + args.to );
           } );
 
           simpless.on( 'write:file write:minimized', function ( e, args ) {
@@ -97,7 +98,7 @@ module.exports = function ( grunt ) {
             logger.subtle( '\n\nWatching the following files\n   - ' + args.files.join( '\n   - ' ), '\n\n' );
           } );
 
-          logger.log( 'options', util.inspect( opts ) );
+          logger.subtle( 'options', util.inspect( opts ) );
 
           startProcess();
         } );
@@ -107,7 +108,8 @@ module.exports = function ( grunt ) {
     p.then( function () {
       if ( opts.watch ) {
         //var moment = require( 'moment' );
-        logger.subtle( '\n\n[' + moment().format( 'MM/DD/YYYY HH:mm:ss' ) + ']', '...Waiting for changes...\n\n' );
+        logger.print('');
+        logger.subtle( '[' + moment().format( 'MM/DD/YYYY HH:mm:ss' ) + ']', '...Waiting for changes...\n\n' );
         return;
       }
       done();
