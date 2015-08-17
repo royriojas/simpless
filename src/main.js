@@ -22,7 +22,6 @@ module.exports = {
   processTargets: function ( dataEntry, cli ) {
     var me = this;
 
-
     var _files = dataEntry.files || [ ];
     cli.log( dataEntry.name, 'start!' );
 
