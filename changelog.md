@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v3.0.8
+- **Bug Fixes**
+  - Less noisy grunt task output - [11884c0]( https://github.com/royriojas/simpless/commit/11884c0 ), [royriojas](https://github.com/royriojas), 17/08/2015 15:40:23
+
+    
 ## v3.0.7
 - **Features**
   - allow to specify more than on task to run at a time - [7f3d7cf]( https://github.com/royriojas/simpless/commit/7f3d7cf ), [royriojas](https://github.com/royriojas), 17/08/2015 02:06:31
