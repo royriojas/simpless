@@ -51,7 +51,7 @@
   "dependencies": {
     "autoprefixer-core": "^5.2.0",
     "chokidar": "^1.0.3",
-    "clix": "^2.0.3",
+    "clix": "^2.0.12",
     "clix-logger": "^0.1.3",
     "csso": "^1.3.11",
     "debouncy": "^1.0.4",

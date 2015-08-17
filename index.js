@@ -52,10 +52,17 @@ var checkIfRelativePath = function ( urlToCheck ) {
   return urlToCheck.match( DATA_URI_MATCHER ) ? false : urlToCheck.match( RELATIVE_TO_HOST_MATCHER ) ? false : !urlToCheck.match( PROTOCOL_MATCHER );
 };
 
+var md5 = function ( str, encoding ) {
+  var crypto = require( 'crypto' );
+  return crypto
+    .createHash( 'md5' )
+    .update( str + '' )
+    .digest( encoding || 'hex' );
+};
+
 module.exports = {
   create: function ( descriptor, options ) {
     var fileCache = { };
-    var idCounter = 0;
 
     var opts = extend( true, {
       banner: '',
@@ -82,7 +89,7 @@ module.exports = {
 
     return extend( dispatcher.create(), {
       getId: function ( pathToFile ) {
-        var id = fileCache[ pathToFile ] = fileCache[ pathToFile ] || idCounter++;
+        var id = fileCache[ pathToFile ] = fileCache[ pathToFile ] || md5( pathToFile );
         return id;
       },
       rewriteURLS: function ( ctn, src, destDir ) {
@@ -185,83 +192,96 @@ module.exports = {
           options: opts
         } );
 
-        var promises = src.map( function ( file ) {
-          me.fire( 'compile:file', { file: file } );
-          return compileLess( file, opts.lessOptions, opts.userFns ).then( function ( params ) {
-            var result = params.css;
-            var rewriteDescriptor = me.rewriteURLS( result, file, path.dirname( dest ) );
+        // we should be able to use Promise.all
+        // but for some reason, if the compileLess process
+        // is run in parallel will have some troubles and will
+        // stop.
+        //
+        // So in this case we're just making sure that everything
+        // is done in sequence and the results of the operations
+        // are stored in this promise variable
+        var promises = [ ];
 
-            result = rewriteDescriptor.ctn;
+        return src.reduce( function ( seq, file ) {
+          return seq.then( function () {
+            me.fire( 'compile:file', { file: file } );
+            return compileLess( file, opts.lessOptions, opts.userFns ).then( function ( params ) {
+              var result = params.css;
 
-            return autoPrefix( result, {
-              file: file,
-              dest: dest,
-              autoprefixer: opts.autoprefixer
-            } ).then( function ( prefixedCSS ) {
-              return {
-                prefixed: prefixedCSS,
-                meta: {
-                  dest: dest,
-                  referencedFiles: rewriteDescriptor.referencedFiles,
-                  imports: params.imports || [ ],
-                  src: file
-                }
-              };
+              var rewriteDescriptor = me.rewriteURLS( result, file, path.dirname( dest ) );
+
+              result = rewriteDescriptor.ctn;
+
+              return autoPrefix( result, {
+                file: file,
+                dest: dest,
+                autoprefixer: opts.autoprefixer
+              } ).then( function ( prefixedCSS ) {
+                promises.push( {
+                  prefixed: prefixedCSS,
+                  meta: {
+                    dest: dest,
+                    referencedFiles: rewriteDescriptor.referencedFiles,
+                    imports: params.imports || [ ],
+                    src: file
+                  }
+                } );
+              } );
             } );
           } );
-        } );
+        }, Promise.resolve() ).then( function () {
+          return Promise.all( promises ).then( function ( params ) {
+            var results = [ ];
+            //var meta = [ ];
+            var files = [ ];
 
-        return Promise.all( promises ).then( function ( params ) {
-          var results = [ ];
-          //var meta = [ ];
-          var files = [ ];
+            params.forEach( function ( entry ) {
+              results.push( entry.prefixed );
+              var meta = entry.meta;
+              //console.log( entry.prefixed );
 
-          params.forEach( function ( entry ) {
-            results.push( entry.prefixed );
-            var meta = entry.meta;
-            //console.log( entry.prefixed );
+              files = files.concat( meta.src )
+                .concat( meta.imports )
+                .concat( meta.referencedFiles );
+            } );
 
-            files = files.concat( meta.src )
-              .concat( meta.imports )
-              .concat( meta.referencedFiles );
+            //results = results || [];
+            var args = { referencedFiles: files };
+
+            me.fire( 'compile:end', args );
+
+            me.fire( 'before:write', extend( args, { dest: dest } ) );
+
+            if ( args.cancel ) {
+              return;
+            }
+
+            var result = results.join( os.EOL );
+
+            var banner = opts.banner ? opts.banner + os.EOL : '';
+
+            write( dest, (banner + result) );
+
+            me.fire( 'write:file', args );
+
+            if ( opts.minimize ) {
+              var csso = require( 'csso' );
+              var cssoOptions = opts.cssoOptions || { };
+              var minimized = csso.justDoIt( result, !!cssoOptions.structureModifications );
+              var minimizedDest = makeMinName( dest );
+
+              write( minimizedDest, (banner + minimized) );
+
+              me.fire( 'write:minimized', extend( { }, args, {
+                dest: minimizedDest
+              } ) );
+            }
+
+          } ).catch( function ( err ) {
+            //console.log(err);
+            me.fire( 'error', err );
+          //throw err;
           } );
-
-          //results = results || [];
-          var args = { referencedFiles: files };
-
-          me.fire( 'compile:end', args );
-
-          me.fire( 'before:write', extend( args, { dest: dest } ) );
-
-          if ( args.cancel ) {
-            return;
-          }
-
-          var result = results.join( os.EOL );
-
-          var banner = opts.banner ? opts.banner + os.EOL : '';
-
-          write( dest, (banner + result) );
-
-          me.fire( 'write:file', args );
-
-          if ( opts.minimize ) {
-            var csso = require( 'csso' );
-            var cssoOptions = opts.cssoOptions || { };
-            var minimized = csso.justDoIt( result, !!cssoOptions.structureModifications );
-            var minimizedDest = makeMinName( dest );
-
-            write( minimizedDest, (banner + minimized) );
-
-            me.fire( 'write:minimized', extend( { }, args, {
-              dest: minimizedDest
-            } ) );
-          }
-
-        } ).catch( function ( err ) {
-          //console.log(err);
-          me.fire( 'error', err );
-        //throw err;
         } );
       }
     } );

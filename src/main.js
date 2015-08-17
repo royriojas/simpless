@@ -1,29 +1,54 @@
 'use strict';
 var ES6Promise = require( 'es6-promise' ).Promise;
 var moment = require( 'moment' );
+var extend = require( 'extend' );
 
 module.exports = {
   dirname: __dirname,
+  _getOverrideOptions: function ( opts ) {
+
+    return {
+      watch: opts.watch,
+      watchDelay: opts.watchDelay,
+      banner: opts.banner,
+      minimize: opts.minimize,
+      revision: opts.revision,
+      assetsPathFormat: opts.assetsPathFormat,
+      copyAssets: opts.copyAssets,
+      browsers: opts.browsers,
+      advanceMin: opts.advanceMin
+    };
+  },
+  processTargets: function ( dataEntry, cli ) {
+    var me = this;
+
+
+    var _files = dataEntry.files || [ ];
+    cli.log( dataEntry.name, 'start!' );
+
+    var options = extend( true, dataEntry.options, me._getOverrideOptions( cli.opts ) );
+
+    return _files.reduce( function ( seq, data ) {
+      return seq.then( function () {
+        return me.processTarget( data, options, cli ).then( function () {
+          cli.log( dataEntry.name, 'done!' );
+        } );
+      } );
+    }, ES6Promise.resolve() );
+  },
   processTarget: function ( data, opts, cli ) {
     return new ES6Promise( function ( resolve, reject ) {
-      var expand = require( 'glob-expand' );
-      //var console = require( './../lib/console' );
-      var extend = require( 'extend' );
 
       var path = require( 'path' );
       var process = require( './../lib/process' );
 
-      var src = Array.isArray( data.src ) ? data.src : [ data.src ];
-
-      var files = src.map( function ( glob ) {
-        return path.resolve( process.cwd(), glob );
+      var files = data.src.map( function ( file ) {
+        return path.resolve( data.cwd || process.cwd(), file );
       } );
-
-      files = expand.apply( null, files );
 
       if ( files.length === 0 ) {
         //console.log( chalk.green( '>> no files to beautify' ) );
-        cli.error( 'No files provided as input', src, '\n' );
+        cli.error( 'No files provided as input', data.src, '\n' );
         cli.showHelp();
         return resolve();
       }
@@ -86,11 +111,10 @@ module.exports = {
           if ( simplessOpts.watch ) {
             cli.print( '' );
             cli.success( '[' + moment().format( 'MM/DD/YYYY HH:mm:ss' ) + ']', '...Simpless waiting for changes...\n\n' );
-            return;
+          //return;
           }
-          cli.ok( 'Done!' );
           resolve();
-        } );
+        }, reject );
       };
 
       simpless.on( 'write:file write:minimized', function ( e, args ) {
@@ -127,15 +151,52 @@ module.exports = {
     } );
   },
   run: function ( cli ) {
-    var opts = cli.opts;
+    var cliOpts = cli.opts;
+    var simplessArgs = {
+      options: {}
+    };
 
-    if ( opts.config ) {
-      cli.subtle( 'config option set', opts.config );
+    var targets = [ ];
+
+    if ( cliOpts.config ) {
+      var config = cli.getConfig();
+
+      if ( config ) {
+        extend( true, simplessArgs, config );
+      }
+      targets = targets.concat( cli.getTargets( simplessArgs, cliOpts.target ) );
+    } else {
+      targets = [
+        {
+          name: 'default',
+          files: [
+            {
+              src: cli.expandGlobs( cliOpts._ ),
+              dest: cliOpts.output
+            }
+          ]
+        }
+      ];
     }
 
-    var data = { src: cli.opts._, dest: cli.opts.output };
-
     var me = this;
-    me.processTarget( data, opts, cli );
+
+    var p = targets.reduce( function ( seq, dataEntry ) {
+      return seq.then( function () {
+        return me.processTargets( dataEntry, cli );
+      } );
+    }, ES6Promise.resolve() );
+
+    p.then( function () {
+      //if ( !opts.watch ) {
+      cli.ok( 'simpless done!' );
+    //}
+    }, function ( err ) {
+      //cli.error( err,  );
+      setTimeout( function () {
+        throw err;
+      }, 0 );
+    // nodeProcess.exit(1);
+    } );
   }
 };

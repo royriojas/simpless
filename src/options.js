@@ -89,6 +89,13 @@ module.exports = {
         alias: 'u',
         type: 'String',
         description: 'the path to the user functions module. A simple object where each key is the name of the function and the value is the custom function itself'
+      },
+      {
+        option: 'target',
+        alias: 't',
+        type: 'String',
+        dependsOn: 'config',
+        description: 'The name of the target to execute from all the posible targets'
       }
     ]
   }

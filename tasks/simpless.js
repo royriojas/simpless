@@ -16,7 +16,7 @@ module.exports = function ( grunt ) {
       watchDelay: false,
       revision: null,
       assetsPathFormat: 'assets/{REVISION}_{GUID}_{FNAME}',
-      copyAssetsToDestFolder: true,
+      copyAssets: true,
       browsers: 'last 2 versions',
       advanceMin: true,
       minimize: true,
