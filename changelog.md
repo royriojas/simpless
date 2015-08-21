@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v3.0.10
+- **Build Scripts Changes**
+  - Update clix to obtain `ext` and `rename` options - [f483153]( https://github.com/royriojas/simpless/commit/f483153 ), [Roy Riojas](https://github.com/Roy Riojas), 21/08/2015 01:42:40
+
+    
 ## v3.0.9
 - **Build Scripts Changes**
   - include latest clix to fix issue expanding mappings - [fe08d98]( https://github.com/royriojas/simpless/commit/fe08d98 ), [Roy Riojas](https://github.com/Roy Riojas), 20/08/2015 23:16:41
