@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v3.0.9
+- **Build Scripts Changes**
+  - include latest clix to fix issue expanding mappings - [fe08d98]( https://github.com/royriojas/simpless/commit/fe08d98 ), [Roy Riojas](https://github.com/Roy Riojas), 20/08/2015 23:16:41
+
+    
 ## v3.0.8
 - **Bug Fixes**
   - Less noisy grunt task output - [11884c0]( https://github.com/royriojas/simpless/commit/11884c0 ), [royriojas](https://github.com/royriojas), 17/08/2015 15:40:23
