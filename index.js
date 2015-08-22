@@ -228,9 +228,7 @@ module.exports = {
                 } );
               } );
             }, function ( err ) {
-              setTimeout( function () {
-                throw err;
-              }, 0 );
+              me.fire( 'error', err );
             } );
           } );
         }, Promise.resolve() ).then( function () {
