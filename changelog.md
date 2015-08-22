@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v3.0.11
+- **Enhancements**
+  - Properly handle errors thrown during parsing less file - [7a76f95]( https://github.com/royriojas/simpless/commit/7a76f95 ), [royriojas](https://github.com/royriojas), 21/08/2015 17:27:49
+
+    
 ## v3.0.10
 - **Build Scripts Changes**
   - Update clix to obtain `ext` and `rename` options - [f483153]( https://github.com/royriojas/simpless/commit/f483153 ), [Roy Riojas](https://github.com/Roy Riojas), 21/08/2015 01:42:40
