@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v3.0.12
+- **Enhancements**
+  - Do not break the tasks if an error happen in one target - [0ac4f26]( https://github.com/royriojas/simpless/commit/0ac4f26 ), [royriojas](https://github.com/royriojas), 21/08/2015 17:36:37
+
+    
 ## v3.0.11
 - **Enhancements**
   - Properly handle errors thrown during parsing less file - [7a76f95]( https://github.com/royriojas/simpless/commit/7a76f95 ), [royriojas](https://github.com/royriojas), 21/08/2015 17:27:49
