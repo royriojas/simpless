@@ -227,6 +227,10 @@ module.exports = {
                   }
                 } );
               } );
+            }, function ( err ) {
+              setTimeout( function () {
+                throw err;
+              }, 0 );
             } );
           } );
         }, Promise.resolve() ).then( function () {
