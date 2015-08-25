@@ -60,7 +60,7 @@
     "extend": "^3.0.0",
     "fs-extra": "^0.18.4",
     "glob-expand": "^0.1.0",
-    "less": "https://github.com/royriojas/less.js/tarball/imports-cache",
+    "less": "https://github.com/royriojas/less.js/tarball/imports-in-memory-cache",
     "less-plugin-glob": "^1.1.0",
     "less-plugin-inline-urls": "^1.1.0",
     "moment": "^2.10.6",
