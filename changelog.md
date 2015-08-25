@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v3.0.13
+- **Bug Fixes**
+  - make sure watcher honor the changes on imported files - [7515364]( https://github.com/royriojas/simpless/commit/7515364 ), [royriojas](https://github.com/royriojas), 25/08/2015 12:54:30
+
+    
 ## v3.0.12
 - **Enhancements**
   - Do not break the tasks if an error happen in one target - [0ac4f26]( https://github.com/royriojas/simpless/commit/0ac4f26 ), [royriojas](https://github.com/royriojas), 21/08/2015 17:36:37
