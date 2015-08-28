@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v3.0.14
+- **Bug Fixes**
+  - properly throw errors during path rewriting - [7cd83ca]( https://github.com/royriojas/simpless/commit/7cd83ca ), [royriojas](https://github.com/royriojas), 28/08/2015 14:35:18
+
+    
 ## v3.0.13
 - **Bug Fixes**
   - make sure watcher honor the changes on imported files - [7515364]( https://github.com/royriojas/simpless/commit/7515364 ), [royriojas](https://github.com/royriojas), 25/08/2015 12:54:30
