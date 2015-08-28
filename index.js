@@ -205,10 +205,24 @@ module.exports = {
         return src.reduce( function ( seq, file ) {
           return seq.then( function () {
             me.fire( 'compile:file', { file: file } );
+
+            // make sure we start with an empty cache at the beginning
+            // of the processing
+            var cache = require( 'less/lib/less/imports-cache' );
+            cache.replace( { } );
+
             return compileLess( file, opts.lessOptions, opts.userFns ).then( function ( params ) {
               var result = params.css;
 
-              var rewriteDescriptor = me.rewriteURLS( result, file, path.dirname( dest ) );
+              var rewriteDescriptor;
+
+              try {
+                rewriteDescriptor = me.rewriteURLS( result, file, path.dirname( dest ) );
+              } catch (ex) {
+                setTimeout( function () {
+                  throw ex;
+                } );
+              }
 
               result = rewriteDescriptor.ctn;
 
