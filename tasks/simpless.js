@@ -20,7 +20,6 @@ module.exports = function ( grunt ) {
       copyAssets: true,
       browsers: 'last 2 versions',
       advanceMin: true,
-      minimize: true,
       userFns: {}
     } );
 
