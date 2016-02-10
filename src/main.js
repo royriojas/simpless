@@ -36,6 +36,7 @@ module.exports = {
     }, ES6Promise.resolve() );
   },
   processTarget: function ( data, opts, cli ) {
+    var me = this;
     return new ES6Promise( function ( resolve, reject ) {
 
       var path = require( 'path' );
@@ -141,8 +142,7 @@ module.exports = {
         }
       };
 
-      process.on( 'uncaughtException', removeWatcher );
-      process.on( 'beforeExit', removeWatcher );
+      me.removeWatchers.push( removeWatcher );
 
       cli.subtle( 'options', opts );
 
@@ -156,6 +156,21 @@ module.exports = {
     };
 
     var targets = [ ];
+    var me = this;
+
+    me.removeWatchers = [ ];
+
+    process.on( 'uncaughtException', function () {
+      me.removeWatchers.forEach( function ( fn ) {
+        fn && fn();
+      } );
+    } );
+
+    process.on( 'beforeExit', function () {
+      me.removeWatchers.forEach( function ( fn ) {
+        fn && fn();
+      } );
+    } );
 
     if ( cliOpts.config ) {
       var config = cli.getConfig();
@@ -177,8 +192,6 @@ module.exports = {
         }
       ];
     }
-
-    var me = this;
 
     var p = targets.reduce( function ( seq, dataEntry ) {
       return seq.then( function () {
