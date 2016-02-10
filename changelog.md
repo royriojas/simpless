@@ -1,5 +1,10 @@
 
 # simpless - Changelog
+## v3.1.0
+- **Build Scripts Changes**
+  - Fix possible memory leak issue when using `process.on` - [762eec7]( https://github.com/royriojas/simpless/commit/762eec7 ), [Roy Riojas](https://github.com/Roy Riojas), 09/02/2016 23:14:39
+
+    
 ## v3.0.16
 - **Enhancements**
   - do not read from file if the content is provided - [9b2dfdc]( https://github.com/royriojas/simpless/commit/9b2dfdc ), [royriojas](https://github.com/royriojas), 20/11/2015 13:57:05
