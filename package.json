@@ -20,7 +20,9 @@
     "post-v": "npm run do-changelog && git push --no-verify && git push --tags --no-verify",
     "bump-major": "npm run pre-v && npm version major -m 'BLD: Release v%s' && npm run post-v",
     "bump-minor": "npm run pre-v && npm version minor -m 'BLD: Release v%s' && npm run post-v",
-    "bump-patch": "npm run pre-v && npm version patch -m 'BLD: Release v%s' && npm run post-v"
+    "bump-patch": "npm run pre-v && npm version patch -m 'BLD: Release v%s' && npm run post-v",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "bin": {
     "simpless": "./bin/cli.js"
@@ -67,7 +69,8 @@
     "moment": "^2.10.6",
     "postcss": "^4.1.11",
     "stringformat": "0.0.5",
-    "write": "^0.2.0"
+    "write": "^0.2.0",
+    "snyk": "^1.105.0"
   },
   "changelogx": {
     "ignoreRegExp": [
@@ -90,5 +93,6 @@
     "less compiler",
     "css concact",
     "move relative resources to the output folder"
-  ]
+  ],
+  "snyk": true
 }
