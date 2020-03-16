@@ -67,7 +67,7 @@
     "moment": "^2.10.6",
     "postcss": "^4.1.11",
     "stringformat": "0.0.5",
-    "write": "^0.2.0"
+    "write": "^2.0.0"
   },
   "changelogx": {
     "ignoreRegExp": [
