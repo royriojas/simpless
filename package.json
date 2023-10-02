@@ -49,7 +49,7 @@
     "watch-spawn": "^1.0.3"
   },
   "dependencies": {
-    "autoprefixer-core": "^5.2.0",
+    "autoprefixer-core": "^6.0.0",
     "chokidar": "^1.0.3",
     "clix": "^2.0.15",
     "clix-logger": "^0.1.3",
@@ -65,7 +65,7 @@
     "less-plugin-glob": "^1.1.0",
     "less-plugin-inline-urls": "^1.1.0",
     "moment": "^2.10.6",
-    "postcss": "^4.1.11",
+    "postcss": "^8.4.31",
     "stringformat": "0.0.5",
     "write": "^0.2.0"
   },
